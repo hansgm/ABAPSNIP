@@ -1,0 +1,214 @@
+ZCL_CONVERT===================CCDEF          HGMELIGMEYLI HGMELIGMEYLI
+**************************************************************************************************************************************************
+*"* use this source file for any type declarations (class
+*"* definitions, interfaces or data types) you need for method
+*"* implementation or private method's signature
+**************************************************************************************************************************************************
+**************************************************************************************************************************************************
+ZCL_CONVERT===================CCIMP          HGMELIGMEYLI HGMELIGMEYLI
+**************************************************************************************************************************************************
+*"* local class implementation for public class
+*"* use this source file for the implementation part of
+*"* local helper classes
+**************************************************************************************************************************************************
+**************************************************************************************************************************************************
+ZCL_CONVERT===================CCMAC          HGMELIGMEYLI HGMELIGMEYLI
+**************************************************************************************************************************************************
+*"* use this source file for any macro definitions you need
+*"* in the implementation part of the class
+**************************************************************************************************************************************************
+**************************************************************************************************************************************************
+ZCL_CONVERT===================CI             HGMELIGMEYLI HGMELIGMEYLI
+**************************************************************************************************************************************************
+*"* private components of class ZCL_CONVERT
+*"* do not include other source files here!!!
+private section.
+**************************************************************************************************************************************************
+**************************************************************************************************************************************************
+ZCL_CONVERT===================CM001          HGMELIGMEYLI HGMELIGMEYLI
+**************************************************************************************************************************************************
+method xstring_to_base64.
+* This function converts xstring to base64 string.
+* Note conversion in CL_HTTP classes do not seem to do the job properly
+* Note also that the call beneath may be subject to changed without notification by SAP and is not documented
+  constants: lc_op_enc type x value 36.
+  call 'SSF_ABAP_SERVICE'
+     id 'OPCODE' field lc_op_enc
+     id 'BINDATA' field iv_xstring
+     id 'B64DATA' field rv_string.                        "#EC CI_CCALL
+endmethod.
+**************************************************************************************************************************************************
+**************************************************************************************************************************************************
+ZCL_CONVERT===================CM002          HGMELIGMEYLI HGMELIGMEYLI
+**************************************************************************************************************************************************
+method class_constructor.
+* Quick solution. May be enhanced to proper way when needed.
+  integration_client = sy-mandt.
+  integration_client+1(2) = '00'.
+  application_client = sy-mandt.
+  application_client+1(2) = '01'.
+endmethod.
+**************************************************************************************************************************************************
+**************************************************************************************************************************************************
+ZCL_CONVERT===================CM003          HGMELIGMEYLI HGMELIGMEYLI
+**************************************************************************************************************************************************
+method STRING_TO_SOLI.
+  data: lv_soli type SO_TEXT255,
+        lv_string type string.
+  lv_string = iv_string.
+  do.
+    if lv_string is initial.
+      exit.
+    endif.
+    lv_soli = lv_string.
+    append lv_soli to rt_soli.
+    shift lv_string left by 255 places in character mode.
+  enddo.
+endmethod.
+**************************************************************************************************************************************************
+**************************************************************************************************************************************************
+ZCL_CONVERT===================CM004          HGMELIGMEYLI HGMELIGMEYLI
+**************************************************************************************************************************************************
+method cx_root_2_string.
+  data: lv_message  type string,
+        lv_progname type syrepid,
+        lv_inclname type syrepid,
+        lv_srceline type i,
+        lv_srclnstr type string.
+  ir_cx_root->get_source_position(
+    importing
+      program_name = lv_progname
+      include_name = lv_inclname
+      source_line  = lv_srceline ).
+  lv_message = ir_cx_root->if_message~get_text( ).
+  lv_srclnstr = lv_srceline.
+  concatenate  'CX_ROOT?'
+               'Program='  lv_progname
+               '&Include=' lv_inclname
+               '&linno='   lv_srclnstr
+               '&message=' lv_message
+               into rs_string.
+endmethod.
+**************************************************************************************************************************************************
+**************************************************************************************************************************************************
+ZCL_CONVERT===================CM005          HGMELIGMEYLI HGMELIGMEYLI
+**************************************************************************************************************************************************
+method BASE64_TO_XSTRING.
+* This function converts xstring to base64 string.
+* Note conversion in CL_HTTP classes do not seem to do the job properly
+* Note also that the call beneath may be subject to changed without notification by SAP and is not documented
+  constants: lc_op_enc type x value 37.
+  call 'SSF_ABAP_SERVICE'
+     id 'OPCODE' field lc_op_enc
+     id 'BINDATA' field rv_xstring
+     id 'B64DATA' field iv_string.                        "#EC CI_CCALL
+endmethod.
+**************************************************************************************************************************************************
+**************************************************************************************************************************************************
+ZCL_CONVERT===================CM006          HGMELIGMEYLI HGMELIGMEYLI
+**************************************************************************************************************************************************
+method xstring_to_xtab.
+  data: workspace type xstring,
+        workxrec  type zxrec1024.
+  workspace = in.
+  while xstrlen( workspace ) > 0.
+    workxrec = workspace.
+    append workxrec to out.
+    shift workspace left by 1024 places in byte mode.
+  endwhile.
+endmethod.
+**************************************************************************************************************************************************
+**************************************************************************************************************************************************
+ZCL_CONVERT===================CM007          HGMELIGMEYLI HGMELIGMEYLI
+**************************************************************************************************************************************************
+method XTAB_TO_XSTRING.
+  data: workrec type zxrec1024.
+  clear ret.
+  loop at in into workrec.
+    concatenate ret workrec into ret in byte mode.
+  endloop.
+  ret = ret(len).
+endmethod.
+**************************************************************************************************************************************************
+**************************************************************************************************************************************************
+ZCL_CONVERT===================CO             HGMELIGMEYLI HGMELIGMEYLI
+**************************************************************************************************************************************************
+*"* protected components of class ZCL_CONVERT
+*"* do not include other source files here!!!
+protected section.
+**************************************************************************************************************************************************
+**************************************************************************************************************************************************
+ZCL_CONVERT===================CP             HGMELIGMEYLI HGMELIGMEYLI
+**************************************************************************************************************************************************
+class-pool .
+*"* class pool for class ZCL_CONVERT
+*"* local type definitions
+include ZCL_CONVERT===================ccdef.
+*"* class ZCL_CONVERT definition
+*"* public declarations
+  include ZCL_CONVERT===================cu.
+*"* protected declarations
+  include ZCL_CONVERT===================co.
+*"* private declarations
+  include ZCL_CONVERT===================ci.
+endclass. "ZCL_CONVERT definition
+*"* macro definitions
+include ZCL_CONVERT===================ccmac.
+*"* local class implementation
+include ZCL_CONVERT===================ccimp.
+class ZCL_CONVERT implementation.
+*"* method's implementations
+  include methods.
+endclass. "ZCL_CONVERT implementation
+**************************************************************************************************************************************************
+**************************************************************************************************************************************************
+ZCL_CONVERT===================CT             HGMELIGMEYLI HGMELIGMEYLI
+**************************************************************************************************************************************************
+*"* dummy include to reduce generation dependencies between
+*"* class ZCL_CONVERT and it's users.
+*"* touched if any type reference has been changed
+**************************************************************************************************************************************************
+**************************************************************************************************************************************************
+ZCL_CONVERT===================CU             HGMELIGMEYLI HGMELIGMEYLI
+**************************************************************************************************************************************************
+class ZCL_CONVERT definition
+  public
+  create public .
+public section.
+*"* public components of class ZCL_CONVERT
+*"* do not include other source files here!!!
+  class-data INTEGRATION_CLIENT type MANDT read-only .
+  class-data APPLICATION_CLIENT type MANDT read-only .
+  class-methods BASE64_TO_XSTRING
+    importing
+      !IV_STRING type STRING
+    returning
+      value(RV_XSTRING) type XSTRING .
+  class-methods CLASS_CONSTRUCTOR .
+  class-methods STRING_TO_SOLI
+    importing
+      !IV_STRING type STRING
+    returning
+      value(RT_SOLI) type BCSY_TEXT .
+  class-methods XSTRING_TO_BASE64
+    importing
+      value(IV_XSTRING) type XSTRING
+    returning
+      value(RV_STRING) type STRING .
+  class-methods CX_ROOT_2_STRING
+    importing
+      !IR_CX_ROOT type ref to CX_ROOT
+    returning
+      value(RS_STRING) type STRING .
+  class-methods XSTRING_TO_XTAB
+    importing
+      !IN type XSTRING
+    returning
+      value(OUT) type ZXTAB1024 .
+  class-methods XTAB_TO_XSTRING
+    importing
+      !IN type ZXTAB1024
+      !LEN type I
+    returning
+      value(RET) type XSTRING .
+**************************************************************************************************************************************************

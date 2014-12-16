@@ -1,0 +1,33 @@
+  
+* DDL by Key Made easy
+* ZZMANCENP is attribute of value  PERNR_D in context_node   
+*PATHTOFIELDINCONTEXT
+* 
+* Just for assigning 3 possible values code as follows
+* The element UI is a simple DDL by Key.  
+  
+  
+  data: ls_value    type wdr_context_attr_value,
+        lt_valueset type table of wdr_context_attr_value.
+
+  ls_value-value   = '00001122'.
+  ls_value-text = 'Pieter Peeters'.
+  append ls_value to lt_valueset.
+
+  ls_value-value   = '00002234'.
+  ls_value-text = 'Geertje Truiden'.
+  append ls_value to lt_valueset.
+
+  ls_value-value   = '00003344'.
+  ls_value-text = 'Peet van Peet'.
+  append ls_value to lt_valueset.
+
+  data lo_nd_zpa0023raw type ref to if_wd_context_node.
+  lo_nd_zpa0023raw = wd_context->path_get_node( path =
+ `PATHTOFIELDINCONTEXT` ).
+  data: lr_node_info type ref to if_wd_context_node_info.
+  lr_node_info  = lo_nd_zpa0023raw->get_node_info( ).
+
+  lr_node_info->set_attribute_value_set(
+    name  = 'ZZMANCENP'
+    value_set = lt_valueset ).
