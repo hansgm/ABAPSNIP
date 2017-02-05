@@ -23,7 +23,6 @@ start-of-selection.
       write : /  |Not exact: { ex2->value }| .
   endtry.
 
-
   try.
       data(float3) = exact decfloat34( ( ( 5 / 3 ) * 12 )  / 20 ).
       write : / 'Exact',  float3.
