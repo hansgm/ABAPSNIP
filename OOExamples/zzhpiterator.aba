@@ -5,7 +5,6 @@ try.
     data(sql) = new cl_sql_statement( ).
     data(waers) = |EUR|.
 
-*   New
     sql->set_param( ref #( sy-mandt ) ).
     sql->set_param( ref #( waers ) ).
 
