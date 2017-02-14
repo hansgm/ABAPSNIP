@@ -7,6 +7,7 @@ endclass.
 
 class cla implementation.
   method getme.
+    return me.
   endmethod.
 endclass.
 
