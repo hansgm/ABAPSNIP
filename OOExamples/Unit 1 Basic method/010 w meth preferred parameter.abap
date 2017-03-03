@@ -2,7 +2,7 @@ REPORT  ZZHPCLASS_W_ATTR.
 
 class myClass definition.
   public section.
-    methods IntToPower importing i type i
+    methods IntToPower importing i type i optional 
                                  p type i default 2
                                  preferred parameter i
                        returning value(r) type i.
@@ -24,5 +24,6 @@ start-of-selection.
   create object myObj.
 
   loci = myObj->IntToPower( i = 2 p = 5 ).
+  loci = myObj->IntToPower( 2 ).
 
   write loci.
