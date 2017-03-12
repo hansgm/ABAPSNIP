@@ -1,45 +1,35 @@
-REPORT  Z_INTERFACE.
+report zzhp_exc.
 
-interface myInterface.
-  data: myInt type i.
-  methods: setInt importing inInt type i,
-           getInt returning value(exInt) type i.
-endinterface.
-
-class myClass definition.
+class exc definition inheriting from cx_static_check.
   public section.
-    interfaces: myInterface.
+    data: errortext type string.
+    methods: constructor importing exctext type string.
 endclass.
 
-class myClass implementation.
-  method myInterface~setInt.
-    myInterface~myInt = inInt.
-  endmethod.
-
-  method myInterface~getInt.
-    exInt = myInterface~myInt.
+class exc implementation.
+  method constructor.
+    super->constructor( ).
+    errortext = exctext.
   endmethod.
 endclass.
 
-class ABC definition.
+
+class myclass definition.
   public section.
-    methods doIt importing IF type ref to myInterface.
+    methods : dothis importing s type string
+                     raising   exc.
 endclass.
 
-class ABC implementation.
-  method doIt.
-    write : / 'Old value of myInt was: ', IF->myInt.
-    IF->setInt( 999 ).
+class myclass implementation.
+  method dothis.
+    write : / s.
+    raise exception type exc exporting exctext = 'Something went wrong'.
   endmethod.
 endclass.
 
 start-of-selection.
-  data: myObj type ref to myClass,
-        myABC type ref to ABC.
-
-  create object : myObj, myABC.
-  myObj->myInterface~setInt( 200 ).
-
-  myABC->doit( myObj ).
-
-  write : / 'Value after call is:    ', myObj->myInterface~myInt.
+  try.
+      new myclass( )->dothis( 'Anything' ).
+    catch exc into data(lx).
+      write : / lx->errortext.               "Check with breakpoint
+  endtry.
