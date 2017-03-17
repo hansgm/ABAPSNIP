@@ -22,6 +22,6 @@ write : / replace( val = mystr regex = |fox| with = |lupa| occ = -1 ).
 write : / substring( val = mystr off = 4 len = 5 ).
 write : / to_upper( substring( val = mystr off = 4 len = 5 ) ).
 write : / mystr.
-write : / translate( val = mystr from = 'brown' to = 'red' ) . "Strange result, use replace
+write : / translate( val = mystr from = 'brown' to = 'red' ) . 
 write : / shift_left( val = mystr places = 4 ).
 write : / reverse( mystr ).
