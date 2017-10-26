@@ -6,7 +6,7 @@ write: strlen( mystr ),
        numofchar( mystr ).
 
 data(charof) =  char_off( val = mystr add  = 10 ).
-write : charof. "If I could have the brains to understand this. It is no way a normal charof
+write : charof. 
 
 mystr = |{ mystr }{ repeat( val = 'fox' occ = 5 ) }|.
 
@@ -25,5 +25,6 @@ write : / mystr.
 
 mystr = |123|.
 write : / translate( val = mystr from = '13' to = 'AC' ) . 
+mystr = |AAAABBBB|.
 write : / shift_left( val = mystr places = 4 ).
 write : / reverse( mystr ).
