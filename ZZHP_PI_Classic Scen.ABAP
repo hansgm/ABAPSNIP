@@ -5,7 +5,8 @@
 *&
 *&
 *&---------------------------------------------------------------------*
-* Not programmed in a clean or efficient way. Just kept as example for only few times use
+* Not programmed in a clean or efficient way. Not fully functional either (some shortcurs). 
+* Just kept as example for only few times use
 
 report zzhp_pxj_scenarios.
 
