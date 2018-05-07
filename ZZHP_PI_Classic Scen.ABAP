@@ -10,7 +10,7 @@
 
 report zzhp_pxj_scenarios.
 
-include ZZHP_PI_CLASS_INCL.ABAP.
+include ZZHP_PI_CLASS_INCL.
 
 data: lv_str type c length 255.
 
