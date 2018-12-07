@@ -6,7 +6,7 @@
 report zzhp_date_plausible.
 
 * data plausibility with convert into timestamp considerably faster then fm DATE_CHECK_PLAUSIBILITY
-* Especially when result is negative (e.q. 00000000) and when date do not reach the 85 century, 
+* Especially when result is negative (e.q. 00000000) and when dates do not reach the 85 century, 
 * at least when tested at my SAP system. 
 * Outcome DATE_CHECK_PLAUSIBILITY and check on convert to time stamp equal for the testcases I used
 
