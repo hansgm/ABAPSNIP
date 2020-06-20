@@ -27,8 +27,8 @@ start-of-selection.
 
       lr->set_cell( row = 1 col = 1 val = 'PIET' ).
       lr->set_cell( row = 1 col = 2 val = 'JAN' ).
-      " en ...
       lr->set_cell( row = 1 col = 3 val = 'JORIS' ).
+      " en ...
       lr->set_cell( row = 1 col = 4 val = 'CORNEEL' ).
 
       lr->set_cell( row = 2 col = 1 val = 'VL' ).
