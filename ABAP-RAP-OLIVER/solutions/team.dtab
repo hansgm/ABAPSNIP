@@ -8,8 +8,9 @@ define table zzhp_team {
   key id          : sysuuid_x16 not null;
   id_uf           : zzhp_teamiduf;
   name            : zzhp_teamname;
-  exposure        : zzhp_teamexposure;
+  exposure        : zzhp_teamexp;
   location        : zzhp_teamlocation;
+  @Semantics.amount.currencyCode : 'zzhp_team.currency_code'
   bonus           : zzhp_teambonus;
   currency_code   : zzhp_cuky;
   created_by      : syuname;
