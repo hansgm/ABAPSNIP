@@ -1,7 +1,7 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Teams HPGM'
 
-define view entity ZI_ZZHP_TEAM as select from zzhp_team {
+define root view entity ZI_ZZHP_TEAM as select from zzhp_team {
     key id as Id,
     id_uf as IdUf,
     name as Name,
