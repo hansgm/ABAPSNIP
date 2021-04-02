@@ -2,7 +2,7 @@
 @EndUserText.label: 'ZZHP Team projection view'
 define root view entity ZC_ZZHP_TEAM
   as projection on ZI_ZZHP_TEAM as Team
-{
+{ 
   key Id,
 
       @UI: {
