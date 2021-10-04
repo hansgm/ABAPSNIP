@@ -7,8 +7,6 @@ report zzhp_bobf_association.
 
 " Read all records of association
 
-include zzhp_bobf_association_object.
-
 start-of-selection.
   data: r_txn_mngr type ref to /bobf/if_tra_transaction_mgr,
         r_svc_mngr type ref to /bobf/if_tra_service_manager,

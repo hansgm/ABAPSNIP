@@ -2,8 +2,6 @@ report zzhp_bobf_association.
 
 " Read single entry (with altkey)
 
-include zzhp_bobf_association_object.
-
 start-of-selection.
   data: r_svc_mngr type ref to /bobf/if_tra_service_manager,
         v_bokey    type /bobf/obm_bo_key.
