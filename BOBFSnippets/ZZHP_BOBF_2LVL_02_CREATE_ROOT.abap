@@ -9,7 +9,6 @@ start-of-selection.
 
   " Initialization
   try.
-      break-point.
       v_bokey = zif_zhp_project_c=>sc_bo_key.
 
       r_txn_mngr = /bobf/cl_tra_trans_mgr_factory=>get_transaction_manager( ).
@@ -40,13 +39,11 @@ start-of-selection.
       ).
 
       if r_message is bound.
-        break-point.
+        " Any processing
       else.
         r_txn_mngr->save( ).
       endif.
 
     catch cx_root into data(lx).
-      break-point.
+      " Any processing
   endtry.
-
-  break-point.

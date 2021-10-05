@@ -1,4 +1,5 @@
-Simple example how to use the BOBF framework from ABAP using /bobf/if_tra_service_manager and /bobf/if_tra_transaction_mgr
+Extremely simple example how to use the BOBF framework from ABAP using /bobf/if_tra_service_manager and /bobf/if_tra_transaction_mgr.
+The ABAP program names explain the comsumer functions (read, update, doAction)
 
 Two level CDS based business object 
 - Project

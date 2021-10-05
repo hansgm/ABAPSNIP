@@ -13,14 +13,12 @@ start-of-selection.
 
   " Initialization
   try.
-      break-point.
       v_bokey = zif_zhp_project_c=>sc_bo_key.
 
       r_txn_mngr = /bobf/cl_tra_trans_mgr_factory=>get_transaction_manager( ).
       r_svc_mngr = /bobf/cl_tra_serv_mgr_factory=>get_service_manager( v_bokey ).
 
     catch cx_root into data(lx).
-      break-point.
+      " Any processing
   endtry.
-
-  break-point.
+  
