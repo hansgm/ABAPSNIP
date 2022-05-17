@@ -1,5 +1,4 @@
-# Method behaviour
-[[_TOC_]]
+# Method behavior
 
 ## 'create object' and 'call' are outdated
 In general, use as little verbs as possible
@@ -61,7 +60,9 @@ endclass.
 data i_input type int4.
 cl_demo_input=>request( exporting text = |Enter a number| changing field = i_input ).
 
-cl_demo_output=>display( |Entered value = { i_input } is { cond string( when naturalnumbers=>is_naturalnumber( i_input ) then '' else 'not' ) } a natural number| ).
+cl_demo_output=>display( |Entered value = { i_input } is { 
+                                            cond string( when naturalnumbers=>is_naturalnumber( i_input ) then '' else 'not' )
+                                            } a natural number| ).
 
 class naturalnumbers implementation.
   method is_naturalnumber.
@@ -97,6 +98,43 @@ class anyclass implementation.
     counter += 1.
     e_number = counter.
     self     = me.
+  endmethod.
+endclass.
+```
+# Subclasses of exception cx_no_check are propagated by default
+Does not require explicit declaration (methods: ... raising ...)
+``` ABAP
+class myexception definition inheriting from cx_no_check.
+  public section.
+    interfaces: if_t100_dyn_msg.
+endclass.
+
+class anyclass definition.
+  public section.
+    methods: method1 returning value(r_counter) type i.
+  private section.
+    data counter type i.
+endclass.
+
+try.
+    data(lr) = new anyclass( ).
+    cl_demo_output=>display( |Round 1 value is { lr->method1( ) }| ).
+    cl_demo_output=>display( |Round 2 value is { lr->method1( ) }| ).
+    cl_demo_output=>display( |Round 3 value is { lr->method1( ) }| ).
+
+  catch cx_root into data(lx).
+    cl_demo_output=>display( |Exception { lx->get_text( ) } | ).
+endtry.
+
+class anyclass implementation.
+  method method1.
+    counter += 1.
+    r_counter = counter.
+    if counter > 2.
+      raise exception type myexception message id '38' number 000 
+                      with |Something went over the limit of 2| 
+                           |Other parameters|.
+    endif.
   endmethod.
 endclass.
 ```
