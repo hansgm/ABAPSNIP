@@ -1,6 +1,7 @@
 # Method behaviour
+[[_TOC_]]
 
-## 'create object' and 'Call' are outdated
+## 'create object' and 'call' are outdated
 In general, use as little verbs as possible
 ``` abap
 class naturalnumbers definition.
@@ -67,6 +68,35 @@ class naturalnumbers implementation.
     if i_number >= 0.
       is_it = abap_true.
     endif.
+  endmethod.
+endclass.
+```
+
+## Methods may have both returning and exporting parameters
+Can be useful in rare cases, for instance for method chaining
+``` ABAP
+class anyclass definition.
+  public section.
+    methods: method1 exporting e_number type i returning value(self) type ref to anyclass.
+    methods: method2 exporting e_number type i returning value(self) type ref to anyclass.
+  private section.
+    data counter type i.
+endclass.
+
+new anyclass( )->method1( importing e_number = data(num1) )->method1( importing e_number = data(num2) ).
+
+cl_demo_output=>display( |Number1 = { num1 } Number2 = { num2 }| ).
+
+class anyclass implementation.
+  method method1.
+    counter += 1.
+    e_number = counter.
+    self     = me.
+  endmethod.
+  method method2.
+    counter += 1.
+    e_number = counter.
+    self     = me.
   endmethod.
 endclass.
 ```
