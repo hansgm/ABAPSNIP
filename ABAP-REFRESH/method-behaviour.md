@@ -103,6 +103,9 @@ endclass.
 ```
 # Subclasses of exception cx_no_check are propagated by default
 Does not require explicit declaration (methods: ... raising ...)
+
+Note raise exception type  message id number triggers where used for the message.
+
 ``` ABAP
 class myexception definition inheriting from cx_no_check.
   public section.

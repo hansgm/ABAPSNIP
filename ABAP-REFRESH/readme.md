@@ -1,6 +1,6 @@
 # ABAP Refresh
 
-Just a bunch of snippets to guide through somehow new ABAP elements for personal purposes.
+Just a bunch of snippets to guide through somehow new ABAP elements for personal purposes. Nothing new under the sun.
 Not a single intention to be complete. Feel free  to use the samples in any way but without any warranty. 
 ABAP Snippets are contained in code blocks in MD so no specific ABAP highlighting
 
